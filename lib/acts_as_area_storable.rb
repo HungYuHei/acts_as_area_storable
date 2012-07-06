@@ -1,0 +1,2 @@
+module ActsAsAreaStorable
+end
