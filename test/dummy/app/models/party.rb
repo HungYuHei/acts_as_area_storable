@@ -1,3 +1,3 @@
 class Party < ActiveRecord::Base
-  # attr_accessible :title, :body
+  acts_as_area_storable
 end
