@@ -30,4 +30,16 @@ class ActsAsAreaStorableTest < ActiveSupport::TestCase
     concert.test_city = 'Foshan'
     assert_equal 'Foshan', concert.test_city
   end
+
+  def test_party_should_respond_province_field_city_field_method
+    party = Party.new
+    party.province = 'Canton'
+    party.city = 'Foshan'
+
+    assert_respond_to party, :area_store
+    assert_equal %w(Canton Foshan), party.area_store
+
+    assert_respond_to party, :province_city
+    assert_equal 'Canton#Foshan', party.province_city
+  end
 end

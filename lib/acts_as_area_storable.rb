@@ -3,10 +3,18 @@ module ActsAsAreaStorable
 
   module ClassMethods
     def acts_as_area_storable(opts = {})
-      opts[:province_field] ||= :province
-      opts[:city_field] ||= :city
+      province_field = opts[:province_field] || :province
+      city_field = opts[:city_field] || :city
       class_eval %(
-        attr_accessor :#{opts[:province_field]}, :#{opts[:city_field]}
+        attr_accessor :#{province_field}, :#{city_field}
+
+        def area_store
+          [] << #{province_field} << #{city_field}
+        end
+
+        def #{province_field}_#{city_field}
+          area_store.join '#'
+        end
       )
     end
   end
